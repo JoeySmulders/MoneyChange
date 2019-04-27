@@ -5,17 +5,19 @@ const WALKSPEED : float = 100.0
 const JUMP : float = 200.0
 const UP : Vector2 = Vector2(0, -1)
 
-var health : int
+var money : int
 var velocity : Vector2 = Vector2()
 
+signal money_change
+
+var Coin = preload("res://Coin.tscn")
+
 func _ready():
-	health = 10
+	money = 10
 
 func _physics_process(delta : float) -> void:
 	
-	print(health)
-	
-	if health < 1:
+	if money < 1:
 		die()
 	
 	velocity.y += GRAVITY * delta
@@ -35,12 +37,22 @@ func _physics_process(delta : float) -> void:
 		
 	velocity = move_and_slide(velocity, UP)
 	
-	if Input.is_action_just_pressed("ui_fire"):
+	if Input.is_action_just_pressed("ui_fire") && money > 0:
 		toss_coin()
+		
+	if Input.is_action_just_pressed("ui_down"):
+		get_coin()
 
 func die() -> void:
 	print("u ded")
 	
 func toss_coin() -> void:
-	health -= 1
+	money -= 1
+	emit_signal("money_change", money)
 	
+	var coin = Coin.instance()
+	coin.position = position
+	get_parent().add_child(coin)
+	
+func get_coin() -> void:
+	pass
