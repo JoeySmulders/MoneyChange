@@ -4,7 +4,7 @@ onready var label = $TextEdit/Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var current_player_money = $"../Player".money
+	var current_player_money = $"../../Player".money
 	label.text = str(current_player_money)
 
 
