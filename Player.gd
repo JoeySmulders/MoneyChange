@@ -86,15 +86,15 @@ func toss_coin() -> void:
 	get_parent().add_child(coin)
 	
 func buy_item(itemName) -> void:
-	if itemName == "Hat" && money > 5: 
+	if itemName == "Hat": 
 		money -= 5
 		hatItem = true
 		get_node("../Shop/HatCool").queue_free()
-	if itemName == "Coin" && money > 10: 
+	if itemName == "Coin": 
 		money -= 10
 		coinItem = true
 		get_node("../Shop/CoinWings").queue_free()
-	if itemName == "Shoe" && money > 15: 
+	if itemName == "Shoe": 
 		money -= 15
 		shoeItem = true
 		get_node("../Shop/Shoe").queue_free()
@@ -104,6 +104,8 @@ func knockback(damage) -> void:
 	if $CoinTimer.is_stopped():
 		doubleJumped = false
 		$CoinTimer.start()
+		if hatItem: 
+			damage -= 1
 		money -= damage
 		money_changed()
 		$AnimatedSprite/AnimationPlayer.play("HitAnimation")
