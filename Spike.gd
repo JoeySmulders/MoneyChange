@@ -13,7 +13,5 @@ func _ready():
 
 func _on_Spike_body_entered(body):
 	if body.get_name() == "Player":
-		body.money -= value
-		body.money_changed()
-		body.knockback()
+		body.knockback(value)
 

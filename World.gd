@@ -5,7 +5,7 @@ onready var player = $Player
 onready var player_world_pos = get_player_grid_pos()
 
 func _physics_process(delta):
-	update_camera()
+	update_camera(get_player_grid_pos())
 
 func get_player_grid_pos():
 	var pos = player.position
@@ -13,8 +13,7 @@ func get_player_grid_pos():
 	var y = floor(pos.y / window_size.y)
 	return Vector2(x, y)
 	
-func update_camera():
-	var new_player_grid_pos = get_player_grid_pos()
+func update_camera(new_player_grid_pos):
 	var transform = Transform2D()
 	
 	if new_player_grid_pos != player_world_pos:
