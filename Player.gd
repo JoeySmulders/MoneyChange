@@ -81,6 +81,10 @@ func toss_coin() -> void:
 	money_changed()
 	
 	var coin = Coin.instance()
+	
+	if coinItem:
+		coin.fly = true
+	
 	coin.position = position
 	coin.direction = direction
 	get_parent().add_child(coin)

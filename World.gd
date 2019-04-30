@@ -23,3 +23,12 @@ func update_camera(new_player_grid_pos):
 		get_viewport().set_canvas_transform(transform)
 		
 	return transform
+
+func _on_Area2D_body_entered(body):
+	if body.name == "Player":
+		money.money = body.money
+		transform = get_viewport().get_canvas_transform()
+		transform[2] = Vector2(-0, -0)
+		get_viewport().set_canvas_transform(transform)
+		get_tree().change_scene("res://WinScreen.tscn")
+	
